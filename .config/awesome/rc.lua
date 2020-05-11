@@ -222,6 +222,12 @@ awful.screen.connect_for_each_screen(function(s)
     layout = awful.layout.suit.max,
     screen = s 
     })     
+
+    awful.tag.add("VM", {
+    layout = awful.layout.suit.max,
+    screen = s 
+    })     
+    --
     -- Create a promptbox for each screen
     s.mypromptbox = awful.widget.prompt()
     -- Create an imagebox widget which will contain an icon indicating which layout we're using.
@@ -281,7 +287,7 @@ awful.screen.connect_for_each_screen(function(s)
 		dec_brightness_cmd = 'xbacklight -dec 5'
 		}),
 	    -- net_wireless,
-	    power,
+	    -- power,
 	    --  battery_widget(),
             mytextclock,
             s.mylayoutbox,
@@ -568,12 +574,21 @@ awful.rules.rules = {
       }, properties = { titlebars_enabled = false }
     },
 
-    -- Set Pale moon to start at tag "web'
-    { rule = { class = "Pale moon" },
+    -- Set Firefox to start at tag "web'
+    { rule = { class = "Firefox" },
       properties = { screen = 1, 
 		tag = "web", 
 		floating = true, 
 		maximized_vertical = true, 
+		maximized_horizontal = true }  
+		},
+
+    -- Set thunderbird to start at tag "web'
+    { rule = { class = "thunderbird" },
+      properties = { screen = 1, 
+		tag = "web", 
+		floating = true, 
+		maximized_vertical = false, 
 		maximized_horizontal = true }  
 		},
 
@@ -582,8 +597,8 @@ awful.rules.rules = {
       properties = { screen = 1, 
 		tag = "dcmd", 
 		floating = true,  
-		maximized_vertical = true, 
-		maximized_horizontal = true }  
+		maximized_vertical = false, 
+		maximized_horizontal = false }  
 		},
 
     -- Set mpv commander start at tag "media"
@@ -599,6 +614,15 @@ awful.rules.rules = {
     { rule = { class = "Audacious" },
       properties = { screen = 1, 
 		tag = "media", 
+		floating = false,  
+		maximized_vertical = false, 
+		maximized_horizontal = false }  
+		},
+
+    -- Set audacious commander start at tag "media"
+    { rule = { class = "Virt-manager" },
+      properties = { screen = 1, 
+		tag = "VM", 
 		floating = false,  
 		maximized_vertical = false, 
 		maximized_horizontal = false }  
@@ -688,4 +712,5 @@ awful.spawn.with_shell("wicd-client -t")
 awful.spawn.with_shell("blueman-applet")
 awful.spawn.with_shell("pasystray")
 awful.spawn.with_shell("redshift -l manual:55.0:37.0")
+awful.spawn.with_shell("xfce4-power-manager")
 -- awful.spawm.with_shell("doublecmd")
